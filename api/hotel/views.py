@@ -5,7 +5,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from backend.hotel.models import HotelRooms, BookingRoom
-from api.hotel.serializer import (HotelRoomsSerializer, BookingRoomSerializer, BookingRoomListSerializer, HotelRoomsSerializer2)
+from api.hotel.serializer import (HotelRoomsSerializer, BookingRoomSerializer, BookingRoomListSerializer,
+                                  HotelRoomsSerializer2)
 
 
 class HotelRoomsList(generics.ListAPIView):
@@ -30,8 +31,7 @@ class BookingRoomRecord(generics.CreateAPIView):
 
 
 class HotelView(APIView):
-    permission_classes = [permissions.AllowAny]
-
+    """Вывод всех номеров"""
     def get(self, request):
         rooms = HotelRooms.objects.all()
         ser = HotelRoomsSerializer(rooms)
@@ -47,6 +47,7 @@ class BookingRoomRecordView(APIView):
     #     return self.list(request, *args, **kwargs)
 
     def post(self, request):
+        # ? - data=request.data - это request.POST
         room = BookingRoomSerializer(data=request.data)
         entry_date = request.data.get("entry_date")
         depart_date = request.data.get("depart_date")
