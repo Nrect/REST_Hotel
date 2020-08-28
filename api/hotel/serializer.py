@@ -31,7 +31,7 @@ class HotelRoomsSerializer(serializers.ModelSerializer):
     # about_room = serializers.StringRelatedField(many=True)
     # about_room = serializers.SlugRelatedField(many=True, read_only=True, slug_field='title')
     services = RatingsRoomsSerializer(many=True)
-
+    # services = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = HotelRooms
