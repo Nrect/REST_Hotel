@@ -26,10 +26,12 @@ class RatingsRoomsSerializer(serializers.ModelSerializer):
 
 class HotelRoomsSerializer(serializers.ModelSerializer):
     """Номера отеля"""
-    # about_room = HotelFieldsSerializer(many=True)
+    # ? привязываем поля, названия берутся из related_name
+    about_room = HotelFieldsSerializer(many=True)
     # about_room = serializers.StringRelatedField(many=True)
-    about_room = serializers.SlugRelatedField(many=True, read_only=True, slug_field='title')
+    # about_room = serializers.SlugRelatedField(many=True, read_only=True, slug_field='title')
     services = RatingsRoomsSerializer(many=True)
+
 
     class Meta:
         model = HotelRooms
@@ -64,6 +66,7 @@ class BookingHotelSerializer(serializers.ModelSerializer):
 
 class BookingRoomListSerializer(serializers.ModelSerializer):
     """Сериализация списка забронированных номеров"""
+    # ? чтобы была полная информация
     rooms = BookingHotelSerializer(read_only=True)
 
     class Meta:
