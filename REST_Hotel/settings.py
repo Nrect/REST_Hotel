@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'backend.hotel.apps.HotelConfig',
+    'debug_toolbar',
     'rest_framework',
     'drf_yasg'
 ]
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'REST_Hotel.urls'
@@ -119,7 +121,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+INTERNAL_IPS = ['127.0.0.1']
 REST_FRAMEWORK = {
     # ? права
     'DEFAULT_PERMISSION_CLASSES': (
