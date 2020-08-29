@@ -7,6 +7,7 @@ class HotelRooms(models.Model):
     """Номера отеля"""
     title = models.CharField("Название", max_length=500)
     desc = models.CharField("Описание", max_length=5000)
+    image = models.ImageField("Фото", upload_to="room/", null=True, blank=True)
 
     class Meta:
         verbose_name = "Номер отеля"

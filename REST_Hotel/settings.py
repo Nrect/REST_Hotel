@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import datetime
 import os
 from pathlib import Path
 
@@ -38,7 +39,9 @@ INSTALLED_APPS = [
     'backend.hotel.apps.HotelConfig',
     'debug_toolbar',
     'rest_framework',
-    'drf_yasg'
+    'rest_framework.authtoken',
+    'drf_yasg',
+    'djoser'
 ]
 
 MIDDLEWARE = [
@@ -148,21 +151,30 @@ REST_FRAMEWORK = {
     'UPLOADED_FILES_USE_URL': True
 }
 
-# SIMPLE_JWT = {
-#     'AUTH_HEADER_TYPES': ('JWT',),
-# }
-#
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',),
+}
+
+
 # JWT_AUTH = {
+#     # ? время жизни токена
 #     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=2),
+#     # ! Обновление токена. Пользователя может не выкидывать с сайта,если истечет время токена.
+#     # ! Токен обновится незаметно для пользователя.
 #     'JWT_ALLOW_REFRESH': True,
 #     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7)  # default
 # }
-#
-# # DJOSER = {
-# #     'SEND_ACTIVATION_EMAIL': True,
-# #     # 'SEND_CONFIRMATION_EMAIL': True,
-# #     'ACTIVATION_URL': 'auth/activate/{uid}/{token}/',
-# #     'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True,
-# #     'PASSWORD_RESET_CONFIRM_URL': 'auth/reset/confirm/{uid}/{token}/',
-# #     'TOKEN_MODEL': None
-# # }
+
+# ! настройки DJOSER
+# DJOSER = {
+#     # ? активация email
+#     'SEND_ACTIVATION_EMAIL': True,
+#     # 'SEND_CONFIRMATION_EMAIL': True,
+#     # ? url для активации
+#     'ACTIVATION_URL': 'auth/activate/{uid}/{token}/',
+#     # ? сброс пароля
+#     'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True,
+#     # ? сброс url
+#     'PASSWORD_RESET_CONFIRM_URL': 'auth/reset/confirm/{uid}/{token}/',
+#     'TOKEN_MODEL': None
+# }

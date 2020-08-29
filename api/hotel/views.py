@@ -32,6 +32,7 @@ class BookingRoomRecord(generics.CreateAPIView):
 
 class HotelView(APIView):
     """Вывод всех номеров"""
+
     def get(self, request):
         rooms = HotelRooms.objects.all()
         ser = HotelRoomsSerializer(rooms)
@@ -43,8 +44,8 @@ class BookingRoomRecordView(APIView):
     queryset = BookingRoom.objects.all()
     serializer_class = BookingRoomSerializer
 
-    # def get(self, request, *args, **kwargs):
-    #     return self.list(request, *args, **kwargs)
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
 
     def post(self, request):
         # ? - data=request.data - это request.POST
@@ -55,8 +56,10 @@ class BookingRoomRecordView(APIView):
         print(depart_date)
         if room.is_valid():
             room.save(user=request.user)
+        #  ! в функциях обязательно возвращаем статус!!! status=...
         return Response(status=201)
 
+    # ? РАЗДЕЛЕНИЕ ПРАВ
     # def get_permissions(self):
     #     if self.request.method == 'POST':
     #         permission_classes = [AllowAny]
