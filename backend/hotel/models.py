@@ -66,6 +66,7 @@ class BookingRoom(models.Model):
     comment = models.TextField("Комментарий", max_length=2500, blank=True)
     adult = models.PositiveIntegerField("Взрослые", default=0)
     children = models.PositiveIntegerField("Дети", default=0)
+    image = models.ImageField("Фото", upload_to="booking/", null=True, blank=True)
     rooms = models.ForeignKey(
         HotelRooms,
         verbose_name="Заказанный номер",

@@ -32,6 +32,7 @@ class HotelRoomsSerializer(serializers.ModelSerializer):
     # about_room = serializers.SlugRelatedField(many=True, read_only=True, slug_field='title')
     services = RatingsRoomsSerializer(many=True)
     # services = serializers.StringRelatedField(many=True)
+    image = serializers.ImageField(use_url='image.url')
 
     class Meta:
         model = HotelRooms
@@ -39,6 +40,7 @@ class HotelRoomsSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "desc",
+            'image',
             "about_room",
             "services",
         )
@@ -96,6 +98,7 @@ class BookingRoomSerializer(serializers.ModelSerializer):
             "comment",
             "adult",
             "children",
+            "image",
             "rooms",
         )
 
